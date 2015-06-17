@@ -1,0 +1,2 @@
+
+string[] some_strings

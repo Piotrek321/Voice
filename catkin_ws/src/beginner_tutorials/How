@@ -1,0 +1,16 @@
+I terminal:
+
+	source /opt/ros/hydro/setup.bash
+	roscore
+II terminal:
+	source /opt/ros/hydro/setup.bash
+	source ~/catkin_ws/devel/setup.bash
+	cd catkin_ws
+	catkin_make
+	source ./devel/setup.bash
+	roslaunch beginner_tutorials start_demo.launch
+III terminal:
+	source /opt/ros/hydro/setup.bash
+	cd catkin_ws
+	source ./devel/setup.bash
+	rosrun beginner_tutorials talker.py

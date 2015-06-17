@@ -90,7 +90,7 @@ def witVoice():
 
     return response
 
-tablicaDoPublikowania = ['intent','numer','ktoreKomendy', 'kolor', 'jak', 'pewnosc', 'kierunek']
+tablicaDoPublikowania = ['intent','numer','ktoreKomendy', 'kolor', 'jak', 'pewnosc']
 
 if __name__ == "__main__":
     """
@@ -101,7 +101,7 @@ if __name__ == "__main__":
     jak = tablicaDoPublikowania[4]
     """
     wit.init()
-
+    #pub = rospy.Publisher('chatter', String, queue_size=1)
     pub = rospy.Publisher('chatter', Num)
     rospy.init_node('talker', anonymous=True)
     rate = rospy.Rate(10) # 10hz
@@ -171,15 +171,8 @@ if __name__ == "__main__":
                     kolor = 'kolejny'
             try:
                 pewnosc= dataDict["outcomes"][0]["confidence"]
-                pewnosc = pewnosc * 100
             except:
                 pewnosc = 'Null'
-
-            try:
-                kierunek= dataDict["outcomes"][0]["entities"]['kierunek'][0]['value']
-            except:
-                kierunek = 'Null'
-
 
 
             tablicaDoPublikowania[0] = intent
@@ -188,7 +181,6 @@ if __name__ == "__main__":
             tablicaDoPublikowania[3] = kolor
             tablicaDoPublikowania[4] = jak
             tablicaDoPublikowania[5] = str(pewnosc)
-            tablicaDoPublikowania[6] = kierunek
 
         except:
             tablicaDoPublikowania[0] = "NULL"
