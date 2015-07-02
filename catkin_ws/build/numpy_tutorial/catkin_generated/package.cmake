@@ -1,0 +1,7 @@
+set(_CATKIN_CURRENT_PACKAGE "numpy_tutorial")
+set(numpy_tutorial_MAINTAINER "piotrek <piotrek@todo.todo>")
+set(numpy_tutorial_DEPRECATED "")
+set(numpy_tutorial_VERSION "0.0.0")
+set(numpy_tutorial_BUILD_DEPENDS "rospy" "rospy_tutorials" "python-numpy")
+set(numpy_tutorial_RUN_DEPENDS "rospy" "rospy_tutorials" "python-numpy")
+set(numpy_tutorial_BUILDTOOL_DEPENDS "catkin")

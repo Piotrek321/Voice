@@ -1,0 +1,8 @@
+prefix=/home/piotrek/catkin_ws/devel
+
+Name: numpy_tutorial
+Description: Description of numpy_tutorial
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/piotrek/catkin_ws/devel/lib 
+Requires: 

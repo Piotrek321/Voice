@@ -5,7 +5,7 @@ import wit
 import json
 import subprocess
 import rospy
-import wit
+
 import re
 import urllib, pycurl, os
 from std_msgs.msg import String
@@ -83,6 +83,8 @@ def konwertujLiczbe (liczba):
     }.get(liczba,False)
 
 
+
+
 def witVoice():
     wit.voice_query_start("RB3ED7T4K2AU7KMI6JWL7VSXKRVU4YAC")
     time.sleep(czasMowy) 
@@ -90,7 +92,7 @@ def witVoice():
 
     return response
 
-tablicaDoPublikowania = ['intent','numer','ktoreKomendy', 'kolor', 'jak', 'pewnosc', 'kierunek']
+tablicaDoPublikowania = ['intent','numer','ktoreKomendy', 'kolor', 'jak', 'pewnosc', 'kierunek', 'jakaFunkcja', 'tekst']
 
 if __name__ == "__main__":
     """
@@ -100,6 +102,8 @@ if __name__ == "__main__":
     kolor = tablicaDoPublikowania[3]
     jak = tablicaDoPublikowania[4]
     """
+
+    
     wit.init()
 
     pub = rospy.Publisher('chatter', Num)
@@ -180,6 +184,18 @@ if __name__ == "__main__":
             except:
                 kierunek = 'Null'
 
+            try:
+                jakaFunkcja= dataDict["outcomes"][0]["entities"]['jakaFunkcja'][0]['value']
+            except:
+                jakaFunkcja = 'Null'
+
+            try:
+                "Print text"
+                tekst= dataDict["outcomes"][0]["_text"]
+                print tekst
+            except:
+                tekst = 'Null'
+
 
 
             tablicaDoPublikowania[0] = intent
@@ -189,12 +205,17 @@ if __name__ == "__main__":
             tablicaDoPublikowania[4] = jak
             tablicaDoPublikowania[5] = str(pewnosc)
             tablicaDoPublikowania[6] = kierunek
+            tablicaDoPublikowania[7] = jakaFunkcja
+            tablicaDoPublikowania[8] = tekst
+            print "intent: " + intent
+
+
+
 
         except:
             tablicaDoPublikowania[0] = "NULL"
             print('\n' "Intent: Null" '\n')
 
-        
 
         msg_to_send= Num()
         msg_to_send.some_strings = tablicaDoPublikowania
@@ -202,6 +223,7 @@ if __name__ == "__main__":
         print (" ")
         pub.publish(msg_to_send)
         rate.sleep()
+
 
 
     wit.close()
